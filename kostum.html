@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Product Book • Капсула костюмов <strong>NUEVA</strong></title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background:#f8f9fa; color:#1a1a1a; line-height:1.5;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+    .slides-wrapper { display:block; }
+    .slide {
+      min-height:100vh; width:100vw; padding:4vh 6vw;
+      display:flex; flex-direction:column; justify-content:flex-start; align-items:center;
+      page-break-after:always !important; break-after:page !important;
+      overflow-y:auto; overflow-x:hidden; position:relative;
+      background:linear-gradient(135deg, #A3D8F4 0%, #4A90E2 100%);
+      color:#1a1a1a !important;
+    }
+    .slide::after {
+      content:"Слайд " counter(slide);
+      position:absolute; bottom:1rem; right:2rem; font-size:0.9rem;
+      color:#555; opacity:0.5; pointer-events:none;
+    }
+    body { counter-reset:slide; }
+    .slide { counter-increment:slide; }
+    h1 { font-size:clamp(2.2rem,6vw,3.8rem); font-weight:800; letter-spacing:-0.02em; margin-bottom:1.2rem; text-align:center; line-height:1.1; }
+    h2 { font-size:clamp(1.6rem,4.5vw,2.4rem); font-weight:700; margin:1.5rem 0 1rem; text-align:center; }
+    .accent { color:#4A90E2; }
+    .light { color:#444; }
+    .small { font-size:clamp(0.95rem,3vw,1.05rem); line-height:1.55; }
+    .tiny { font-size:clamp(0.8rem,2.5vw,0.88rem); line-height:1.4; }
+    .italic { font-style:italic; }
+    .title-slide {
+      background:linear-gradient(135deg,#A3D8F4 0%,#4A90E2 100%);
+      color:white; text-align:center; justify-content:center; min-height:100vh;
+    }
+    .title-slide h1 { font-size:clamp(3rem,10vw,5.2rem); margin-bottom:1.5rem; }
+    .title-slide .subtitle { font-size:clamp(1.6rem,5vw,2.4rem); opacity:0.95; }
+    .title-slide .slogan { font-size:clamp(1.4rem,4.5vw,2rem); margin-top:2.5rem; opacity:0.9; }
+    .promise { font-size:clamp(2rem,6vw,3.2rem); font-weight:700; text-align:center; max-width:95%; margin:0 auto; line-height:1.3; }
+    .container {
+      max-width:1100px; width:100%; margin:2vh auto;
+      background:rgba(255,255,255,0.96); border-radius:16px;
+      padding:clamp(1.5rem,4vw,3rem) clamp(1.5rem,5vw,4rem);
+      box-shadow:0 8px 32px rgba(0,0,0,0.15); backdrop-filter:blur(8px);
+      color:#1a1a1a !important;
+    }
+    .card {
+      background:white; border-radius:12px; padding:clamp(1rem,3vw,1.6rem);
+      box-shadow:0 4px 16px rgba(0,0,0,0.08); text-align:center; border:1px solid #eee;
+    }
+    .card h2 {
+      font-size:clamp(1.3rem,4vw,1.8rem); margin-bottom:0.8rem;
+      border-top:3px solid #4A90E2; padding-top:0.6rem;
+    }
+    .product-photo-vertical {
+      width:100%; height:clamp(280px,60vw,420px); overflow:hidden; border-radius:12px;
+      margin-bottom:1rem; box-shadow:0 4px 16px rgba(0,0,0,0.1);
+      border:2px solid #fff; background:#f8f9fa;
+    }
+    .product-photo-vertical img {
+      width:100%; height:100%; object-fit:cover; object-position:center;
+    }
+    .recommendation-block {
+      margin-top:2rem; padding:clamp(1rem,4vw,1.5rem);
+      background:rgba(230,245,255,0.9); border-radius:12px;
+      border:2px dashed #4A90E2; text-align:center;
+    }
+    .red-bullets { list-style-type:disc; padding-left:1.5rem; font-size:clamp(0.95rem,3vw,1.05rem); line-height:1.6; }
+    .red-bullets li::marker { color:#4A90E2; }
+    .colors { display:flex; flex-wrap:wrap; gap:0.6rem; justify-content:center; font-size:clamp(0.85rem,2.8vw,0.95rem); }
+    .color-dot { width:20px; height:20px; border-radius:50%; border:2px solid white; box-shadow:0 2px 6px rgba(0,0,0,0.15); }
+    /* Responsive и print остаются без изменений */
+    @media (max-width:1024px) { .slide { padding:4vh 5vw; } .container { padding:2rem 2.5rem; } h1 { margin-bottom:1rem; } .product-photo-vertical { height:clamp(240px,55vw,360px); } .card { padding:1.2rem; } }
+    @media (max-width:768px) { .slide { padding:3vh 4vw; } .container { padding:1.5rem 2rem; margin:1vh auto; } h1 { font-size:clamp(1.8rem,7vw,2.8rem); } h2 { font-size:clamp(1.3rem,5vw,1.9rem); } .small { font-size:clamp(0.9rem,3.5vw,1rem); } .promise { font-size:clamp(1.6rem,6vw,2.4rem); } .product-photo-vertical { height:clamp(220px,70vw,320px); margin-bottom:0.8rem; } .card { padding:1rem; margin-bottom:1rem; } .recommendation-block { padding:1rem; margin-top:1.5rem; } .red-bullets { padding-left:1.2rem; font-size:0.95rem; } .colors { gap:0.4rem; } .color-dot { width:18px; height:18px; } .slide::after { font-size:0.75rem; bottom:0.8rem; right:1rem; } }
+    @media (max-width:480px) { .slide { padding:2vh 4vw; } .container { padding:1.2rem 1.5rem; } h1 { font-size:clamp(1.6rem,8vw,2.4rem); } .title-slide h1 { font-size:clamp(2.4rem,12vw,4rem); } .product-photo-vertical { height:clamp(180px,80vw,280px); } }
+    @media print {
+      @page { size:A4 landscape; margin:0.8cm; }
+      .slide { height:auto; min-height:unset; padding:0.8cm 1.2cm; overflow:hidden; page-break-after:always !important; }
+      body { background:white; }
+      .slide::after { display:none; }
+      .container { box-shadow:none; backdrop-filter:none; background:white; padding:0.5cm 1cm; }
+      h1 { font-size:2.2rem; }
+      h2 { font-size:1.6rem; }
+      .small { font-size:0.9rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="slides-wrapper">
+
+<!-- Слайд 1: Титульный -->
+<div class="slide title-slide">
+  <div class="container">
+    <h1>Product Book<br>Капсула костюмов<br><strong>NUEVA</strong></h1>
+    <div class="subtitle">Брендовые прогулочные комплекты</div>
+    <div class="slogan italic"><strong>NUEVA</strong> — твоя одежда для комфорта и стиля. Без жертв. Без переплат.</div>
+  </div>
+</div>
+
+<!-- Слайд 2: Обзор -->
+<div class="slide">
+  <div class="container">
+    <h1 class="accent">Обзор капсулы костюмов</h1>
+    <p class="small" style="margin:2rem 0 3rem;">
+      <strong>NUEVA</strong> — ежедневная одежда, которая делает лето комфортным, а образ стильным.<br>
+      Универсальность: подходит для разных типов фигур.<br>
+      Свободный крой + дышащая ткань + трендовый дизайн.<br>
+      <strong>2 категории: "Striped" (рубашка + шорты) | "Oversize" (рубашка + штаны)</strong>.
+    </p>
+    <p class="small light" style="margin-top:4rem; text-align:center;">
+      Фокус на свободе движений без переплат
+    </p>
+  </div>
+</div>
+
+<!-- Слайд 3: Объединённые модели -->
+<div class="slide">
+  <div class="container">
+    <h1 class="accent">Модели костюмов</h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,fr)); gap:2rem;">
+      <div class="card">
+        <h2>"Striped" (рубашка + шорты)</h2>
+        <p>Свободный oversize силуэт, подходит для разных типов фигур. Дышащий хлопок в синюю полоску / трендовая жатая ткань. Максимальная свобода движений, расслабленный и уверенный образ.</p><br>
+        <div class="colors">
+          <span class="color-dot" style="background:#0077B6;"></span> Синяя классическая полоска
+          <span class="color-dot" style="background:#E0E0E0;"></span> Трендовая жатая текстура
+        </div>
+      </div>
+      <div class="card">
+        <h2>"Oversize" (рубашка + штаны)</h2>
+        <p>Расслабленный oversize крой, универсален для всех типов фигур. Белая жатая основа + чёрные полоски. Полная свобода движений, стильный современный образ.</p><br>
+        <div class="colors">
+          <span class="color-dot" style="background:#000000;"></span> Чёрные полоски
+          <span class="color-dot" style="background:#E0E0E0;"></span> Белая жатая текстура
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Слайд 4: Целевая аудитория -->
+<div class="slide">
+  <div class="container">
+    <h1 class="accent">Целевая аудитория</h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:2rem; margin-top:1.5rem;">
+      <div class="card"><h2>Возраст</h2><p>Женщины и девушки 18–45 лет</p></div>
+      <div class="card"><h2>Ценности</h2><p>Ценят комфорт, стиль, тренды и универсальность</p></div>
+      <div class="card"><h2>Потребности</h2><p>Ищут комплекты для прогулок, пляжа, дома, путешествий</p></div>
+      <div class="card"><h2>Покупки</h2><p>Покупают на WB</p></div>
+      <div class="card" style="grid-column:span 2; max-width:70%; margin:0 auto;">
+        <h2>Критерии выбора</h2><p>Соотношение цена/качество/эстетика</p>
+      </div>
+    </div>
+    <p class="small light italic" style="margin-top:3.5rem; text-align:center; font-size:1.1rem;">
+      <strong>NUEVA</strong> — для женщин, которые хотят выглядеть и чувствовать себя комфортно каждый день
+    </p>
+  </div>
+</div>
+
+<!-- Слайд 5: УТП -->
+<div class="slide">
+  <div class="container">
+    <h1 class="accent">УТП</h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:2rem; margin-top:1.5rem;">
+      <div class="card"><h2>Комфорт</h2><p>Дышащий материал без сковывания<br>Женственный силуэт<br>Создаёт эффект "расслабленного шика"</p></div>
+      <div class="card"><h2>Ткани</h2><p>Тонкие, мягкие, воздушные (хлопок / жатая)</p></div>
+      <div class="card"><h2>Поддержка</h2><p>Пояс на резинке для удобства</p></div>
+      <div class="card"><h2>Размеры</h2><p>Универсальные</p></div>
+      <div class="card"><h2>Цвета/фасоны</h2><p>Трендовые (полоска, жатая текстура)</p></div>
+      <div class="card"><h2>Цена</h2><p>Доступная, выглядит премиум</p></div>
+    </div>
+    <p class="small light italic" style="margin-top:3.5rem; text-align:center; font-size:1.1rem;">
+      <strong>NUEVA</strong> — премиум комфорт по доступной цене
+    </p>
+  </div>
+</div>
+
+<!-- Слайд 6: Позиционирование -->
+<div class="slide">
+  <div class="container">
+    <h1 class="accent" style="margin-bottom:2.5rem; font-size:3.6rem; text-align:center;">
+      ПОЗИЦИОНИРОВАНИЕ <strong>NUEVA</strong>
+    </h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2rem;">
+      <div class="card">
+        <h2><strong>NUEVA</strong></h2>
+        <ul class="red-bullets">
+          <li>✔ Комфорт без дискомфорта, мягкая ткань</li>
+          <li>✔ Дышащие, не впитывают пот</li>
+          <li>✔ Без лишних деталей</li>
+          <li>✔ Универсальные размеры</li>
+          <li>✔ Трендовые, универсальные</li>
+          <li>✔ Доступная цена</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Аналоги</h2>
+        <ul class="red-bullets">
+          <li>✗ Могут быть неудобными в жару</li>
+          <li>✗ Впитывают пот и запахи</li>
+          <li>✗ Сложные детали</li>
+          <li>✗ Ограниченные размеры</li>
+          <li>✗ Трендовые</li>
+          <li>✗ Высокая цена</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Слайд 7: Тональность бренда -->
+<div class="slide">
+  <div class="container">
+    <h1 class="accent">Тональность бренда</h1>
+    <ul class="red-bullets" style="font-size:1.1rem;">
+      <li>Дружелюбная, уверенная, поддерживающая подруга.</li>
+      <li>Честная — о реальных образах.</li>
+      <li>Слегка дерзкая — лучший комфорт за свои деньги.</li>
+    </ul>
+    <p style="margin-top:2rem; font-size:1.1rem;">
+      <strong>Примеры: «Не напрягайся — наслаждайся. NUEVA сидит так, будто для тебя.»<br>
+      «После прогулки — как новое. Реально.»<br>
+      Не говорим: «Заменит всю одежду», «Не мнется вообще».
+    </p>
+  </div>
+</div>
+
+<!-- Слайд 8: Brand Promise -->
+<div class="slide title-slide">
+  <div class="container">
+    <p class="promise">
+      <strong>NUEVA</strong> — твоя одежда для лета,<br>
+      которая делает образ стильным,<br>
+      а тебя — свободной.<br><br>
+      Без жертв. Без переплат.
+    </p>
+  </div>
+</div>
+
+<!-- Слайд 9: Объединённая цветовая палитра -->
+<div class="slide">
+  <div class="container">
+    <h1 class="accent">Цветовая палитра <strong>NUEVA</strong></h1>
+    <p class="small" style="margin:1rem 0 2rem; text-align:center;">
+      Трендовые и универсальные оттенки для твоей летней одежды
+    </p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:2rem;">
+      <div class="swatch-card">
+        <div class="swatch" style="background:#000000; width:140px; height:140px; margin:0 auto 1rem; border:3px solid #d0d0d0; box-shadow:0 4px 16px rgba(0,0,0,0.15), inset 0 0 8px rgba(0,0,0,0.2);"></div>
+        <h3 style="text-align:center;">Чёрные полоски / Классические</h3>
+        <p class="tiny" style="text-align:center;">
+          угольный · антрацитовый · графитовый · смоляной · ночной · чёрный бархат · эбеновый · ониксовый · чёрный матовый · чёрный шёлк · классический чёрный · строгий · глубокий чёрный · чёрный агат
+        </p>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch" style="background:#FFFFFF; width:140px; height:140px; margin:0 auto 1rem; border:3px solid #d0d0d0; box-shadow:0 4px 16px rgba(0,0,0,0.15), inset 0 0 8px rgba(0,0,0,0.1);"></div>
+        <h3 style="text-align:center;">Белая жатая текстура / Трендовая</h3>
+        <p class="tiny" style="text-align:center;">
+          снежный · молочный · айвори · жемчужный · кремово-белый · белый мрамор · белый фарфор · белый лотос · белый снег · белый крем · белая жатка · объёмная белая · текстурированная белая · чистая белая · белая рельефная
+        </p>
+      </div>
+    </div>
+
+    <!-- Синий цвет внизу по центру -->
+    <div class="swatch-card" style="max-width:500px; margin:2rem auto 0 auto;">
+      <div class="swatch" style="background:#0077B6; width:140px; height:140px; margin:0 auto 1rem; border:3px solid #d0d0d0; box-shadow:0 4px 16px rgba(0,0,0,0.15), inset 0 0 8px rgba(0,0,0,0.1);"></div>
+      <h3 style="text-align:center;">Синяя классическая полоска</h3>
+      <p class="tiny" style="text-align:center;">
+        морской · индиго · лазурный · кобальтовый · синий бархат · синий джинс · синий океан · синий сапфир · синий ультрамарин · синий электрик · полосатый · классический · японский · свежий · динамичный · морской · летний · полоска · полосатый принт
+      </p>
+    </div>
+
+    <p class="small light italic" style="margin-top:2rem; text-align:center;">
+      Эти оттенки — основа капсулы. Они легко сочетаются между собой и с любым гардеробом.
+    </p>
+    <div class="recommendation-block" style="margin-top:2.5rem;">
+      <p class="small" style="font-weight:500;">
+        Рекомендация по карточкам WB / Ozon / Instagram:<br>
+        Чередуйте синонимы в заголовках →<br>
+        «Костюм в чёрную полоску» • «Костюм белая жатая текстура» • «Костюм в синюю полоску» • «Костюм <strong>NUEVA</strong> oversize»
+      </p>
+    </div>
+  </div>
+</div>
+<!-- Слайд 10: Объединённая универсальность и сезонность -->
+<div class="slide">
+  <div class="container">
+    <h1 class="accent" style="margin-bottom:2.5rem; font-size:3.6rem;">УНИВЕРСАЛЬНОСТЬ И СЕЗОННОСТЬ</h1>
+    <p class="small" style="text-align:center; margin-bottom:3rem; font-size:1.15rem; max-width:80%; margin-left:auto; margin-right:auto;">
+      Каждая модель <strong>NUEVA</strong> работает в тёплое время — подбирайте под сезон и образ жизни
+    </p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:2.5rem;">
+      <div class="card">
+        <div class="product-photo-vertical">
+          <img src="https://moscvi4ka.github.io/nuevaproductbook/144A4596%20(4).jpg" alt="Striped костюм">
+        </div>
+        <h2>"Striped" (рубашка + шорты)</h2>
+        <p>Сезон: Теплое время года (лето, тёплая весна/осень)<br>Применение: Прогулки, пляжный отдых, путешествия, фотосессии<br>Домашнее использование: Очень удобно носить дома как уютный домашний костюм — мягко, дышаще, стильно<br>Стайлинг: Заправить для элегантности, бикини под низ, аксессуары для вечера</p>
+      </div>
+      <div class="card">
+        <div class="product-photo-vertical">
+          <img src="https://moscvi4ka.github.io/nuevaproductbook/144A4504%20(1).jpg" alt="Oversize костюм">
+        </div>
+        <h2>"Oversize" (рубашка + штаны)</h2>
+        <p>Сезон: Лето и тёплые месяцы<br>Применение: Повседневные прогулки, путешествия, вечерние лёгкие выходы<br>Домашнее использование: Идеален как домашний комплект — расслабленный крой, белая жатая основа + чёрные полоски для стильных уютных вечеров<br>Стайлинг: Дополнить аксессуарами, бикини/топ под рубашку, штаны с другими верхами</p>
+      </div>
+    </div>
+    <div class="recommendation-block">
+      <p class="small" style="font-size:1.15rem; font-weight:600; color:#4A90E2;">
+        Рекомендации по контенту:<br>
+        Сезонные кампании «Лето в <strong>NUEVA</strong>», UGC #NUEVAHomeSummer,<br>
+        Pinterest «Летние луки с костюмами», A/B-тесты сезонных vs универсальных постов
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Слайд 11: Практичность и уход (с перестановкой) -->
+<div class="slide">
+  <div class="container">
+    <h1 class="accent">Практичность и уход</h1>
+    <p class="small" style="margin:2rem 0 3rem; text-align:center;">
+      <strong>NUEVA</strong> — практично и просто в уходе: долговечно, без хлопот.
+    </p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2rem;">
+      <div class="card">
+        <h2>"Oversize"</h2>
+        <p>Резинка держит форму — практично для дома (не сползает, не тянет).</p>
+      </div>
+      <div class="card">
+        <h2>"Striped"</h2>
+        <p>Дышащие, не мнётся сильно благодаря жатой текстуре — практично для лета/путешествий.</p>
+      </div>
+      <div class="card" style="grid-column:span 2; text-align:center; margin:2rem auto 0; max-width:70%;">
+        <h2>Общий уход</h2>
+        <p>Деликатная стирка 30 °C, не отбеливать, сушить в тени — ткань сохраняет текстуру и цвет (тесты: >50 стирок без деформации).</p>
+      </div>
+    </div>
+    <div class="recommendation-block">
+      <p class="small light" style="font-size:1.1rem; margin:0;">
+        Рекомендации: Контент: видео "Как ухаживать за <strong>NUEVA</strong>". UGC: отзывы "После 20 стирок как новое". A/B: "Практичность" vs "Комфорт".
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Слайд 12: Каналы и точки контакта -->
+<div class="slide">
+  <div class="container">
+    <h1 class="accent">Каналы и точки контакта</h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2rem; margin-top:1.5rem;">
+      <div class="card"><h2>Основной</h2><p>Wildberries</p></div>
+      <div class="card"><h2>Instagram</h2><p>@nueva_brand — UGC, отзывы, behind-the-scenes</p></div>
+      <div class="card"><h2>Упаковка</h2><p>Фирменные бирки</p></div>
+      <div class="card"><h2>Отзывы</h2><p>Активно собираем и репостим</p></div>
+    </div>
+    <p class="small light italic" style="margin-top:3.5rem; text-align:center; font-size:1.1rem;">
+      Каждая точка контакта усиливает доверие к <strong>NUEVA</strong>
+    </p>
+  </div>
+</div>
+
+<!-- Слайд 13: Смыслы для контента (общий) -->
+<div class="slide">
+  <div class="container">
+    <h1 class="accent" style="font-size:3.8rem; margin-bottom:2.5rem;">СМЫСЛЫ ДЛЯ КОНТЕНТА ПО ИЗДЕЛИЯМ</h1>
+    <p class="small" style="text-align:center; margin-bottom:3rem; font-size:1.2rem; max-width:80%; margin-left:auto; margin-right:auto;">
+      Для каждого изделия — свой набор эмоциональных и продающих смыслов.<br>
+      Используйте их в постах, сторис, описаниях WB/Ozon и UGC.
+    </p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:2rem;">
+      <div class="card"><h2>"Striped" (рубашка + шорты)</h2><p>Синяя полоска / жатая текстура<br>Фокус: летний комфорт, универсальность, тренд</p></div>
+      <div class="card"><h2>"Oversize" (рубашка + штаны)</h2><p>Синяя полоска / жатая текстура<br>Фокус: уютный комфорт, универсальность, вечерняя раслабленность, тренд</p></div>
+    </div>
+    <div class="recommendation-block">
+      <p class="small" style="font-size:1.15rem; font-weight:600; color:#4A90E2;">
+        Используйте эти смыслы в постах, сторис, описаниях WB/Ozon.<br>
+        Каждый пункт — это готовый заголовок или подпись к фото/видео.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Слайд 14: Смыслы для "Striped" -->
+<div class="slide">
+  <div class="container">
+    <h1 class="accent">Смыслы для контента по изделиям</h1>
+    <h2>"Striped" (рубашка + шорты)</h2>
+    <ul class="red-bullets" style="font-size:1.1rem; line-height:1.6">
+      <li>«Идеальный летний шорт-костюм» Показываешь, как один комплект закрывает пляж, прогулки, фотосессию и уютный вечер дома без лишних переодеваний.</li>
+      <li>«Полоска + жатка = тренд лета» Демонстрируешь, как классическая полоска в жатой ткани выглядит свежо и добавляет японского вайба без всяких усилий.</li>
+      <li>«Комфорт 24/7 даже в +35» Показываешь, как дышащий хлопок и свободный оверсайз позволяют коже не париться и двигаться свободно весь день.</li>
+      <li>«Шорты + рубашка = 10 образов за минуту» Надеваешь с бикини, кедами или босоножками и показываешь, как быстро меняешь образы одним костюмом.</li>
+      <li>«Домашний люкс без компромиссов» Демонстрируешь, как мягкая жатая ткань и резинка на поясе превращают костюм в стильную домашнюю одежду даже при гостях.</li>
+      <li>«Пляж → город → дом в одном сете» Показываешь, как надеваешь купальник под рубашку на пляж, застёгиваешь для города, расстёгиваешь дома.</li>
+      <li>«Ленивый перфекционизм в одежде» Показываешь, как костюм почти не мнётся, не требует глажки и идеально сидит на любой фигуре без заморочек.</li>
+      <li>«Подарок, который точно угадает» Демонстрируешь лёгкий, красивый, универсальный комплект, который любая девушка сразу начнёт носить каждый день лета.</li>
+      <li>«Свобода движений + женственность» Показываешь, как оверсайз мягко подчёркивает фигуру и позволяет выглядеть расслабленно, но собранно.</li>
+      <li>«Жатая текстура — хит сезона» Снимаешь крупный план и показываешь, как объёмная ткань выглядит интересно на ощупь и в кадре без фильтров.</li>
+      <li>«Отпуск без чемодана одежды» Показываешь, как один костюм заменяет 3–4 вещи и позволяет собираться быстрее и легче.</li>
+      <li>«Утро выходного дня в идеале» Надеваешь сразу после пробуждения и показываешь, как за 30 секунд выглядишь свежо, уютно и модно.</li>
+      <li>«Для тех, кто ненавидит жару» Показываешь, как максимально лёгкий и вентилируемый комплект позволяет забыть про одежду даже в сильную жару.</li>
+      <li>«Стиль без бюджета» Демонстрируешь, как костюм выглядит как премиум, но стоит как базовая вещь — идеальный баланс цены и вау-эффекта.</li>
+      <li>«Раздельное ношение — двойная выгода» Сочетаешь шорты с топом или рубашку с джинсами и показываешь, как гардероб мгновенно становится больше.</li>
+      <li>«Лето в полоску навсегда» Показываешь, как вечный полосатый принт освежает любой день и любое фото сезон за сезоном.</li>
+      <li>«Комфорт, который не жертвуют стилем» Надеваешь и показываешь, как больше не нужно выбирать между «удобно» и «красиво» — здесь оба сразу.</li>
+      <li>«Для активных и ленивых одновременно» Показываешь, как много ходишь без пота и весь день лежишь, но при этом выглядишь круто.</li>
+      <li>«Твой must-have на всё лето» Надеваешь один раз и показываешь, как носишь до осени без усталости от одного и того же образа.</li>
+      <li>«Уют дома + тренд на улице» Показываешь переход из режима «диван» в режим «встреча с подругами» без единого переодевания.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Слайд 15: Смыслы для "Oversize" -->
+<div class="slide">
+  <div class="container">
+    <h1 class="accent">Смыслы для контента по изделиям</h1>
+    <h2>"Oversize" (рубашка + штаны)</h2>
+    <ul class="red-bullets" style="font-size:1.1rem; line-height:1.6">
+      <li>«Оверсайз-костюм — комфорт уровня бог» Показываешь, как широкие штаны + свободная рубашка создают ощущение облака на теле и при этом выглядят как с обложки.</li>
+      <li>«Домашний костюм, который не стыдно показать» Надеваешь дома и показываешь, как белая жатая основа + чёрные полоски позволяют чувствовать себя идеально даже при гостях или Zoom.</li>
+      <li>«Путешествия без стресса» Показываешь, как лёгкий костюм почти не мнётся в сумке и надеваешь сразу по прилёту — уже стильно и собранно.</li>
+      <li>«Штаны палаццо + рубашка = элегантный ленивец» Демонстрируешь, как широкий низ и оверсайз верх визуально вытягивают силуэт без корсетов и утяжек.</li>
+      <li>«Жара? Какая жара?» Показываешь, как дышащая белая жатая основа + чёрные полоски дают максимальную вентиляцию даже в +40 — дискомфорт просто исчезает.</li>
+      <li>«Один костюм — гардероб на месяц» Сочетаешь штаны с топом или рубашку с легинсами и показываешь 10+ образов без единой новой вещи.</li>
+      <li>«Уютный минимализм» Показываешь, как чёрные полоски добавляют нужный интерес на белой жатой основе, но образ остаётся чистым и современным.</li>
+      <li>«Для тех, кто ценит "не напрягаться"» Надеваешь и показываешь, как забываешь про одежду на весь день — нигде не жмёт и не требует поправок.</li>
+      <li>«Домашний вайб 24/7» Показываешь, как просыпаешься, работаешь, гуляешь и спишь в одном костюме — уют не отпускает ни на минуту.</li>
+      <li>«Тренд 2025: расслабленный шик» Демонстрируешь, как оверсайз + чёрные полоски на белой жатке повторяют то, что сейчас носят все модные девушки в Европе.</li>
+      <li>«Подарок мечты» Показываешь универсальный, красивый, практичный комплект, который подойдёт и подруге, и сестре, и маме без риска не угадать.</li>
+      <li>«От дивана до аэропорта» Надеваешь утром дома и показываешь, как вечером в самолёте выглядишь уместно и стильно в любой точке мира.</li>
+      <li>«Женственность без обтягивания» Показываешь, как свободный крой мягко обрисовывает фигуру и даёт комфорт + сексуальность одновременно.</li>
+      <li>«Не мнётся в поездках» Достаёшь из сумки и показываешь, как жатая белая основа + чёрные полоски позволяют встряхнуть костюм и сразу быть готовой к выходу.</li>
+      <li>«Лето без компромиссов» Надеваешь и показываешь, как получаешь стиль и комфорт сразу — без выбора между ними.</li>
+      <li>«Для долгих вечеров дома» Показываешь, как штаны не сползают и рубашка не задирается — полная свобода даже когда лежишь весь вечер.</li>
+      <li>«Стиль "я проснулась такой"» Надеваешь сразу после пробуждения и показываешь, как выглядишь так, будто стилист уже поработал.</li>
+      <li>«Экономия времени на образы» Показываешь, как готовый комплект позволяет собраться за 1 минуту и выйти красивой без раздумий.</li>
+      <li>«Чёрные полоски на белой жатке — классика, которая не надоедает» Демонстрируешь, как сочетание освежает любой день и любое фото — никогда не устаревает.</li>
+      <li>«Твой ежедневный ритуал комфорта» Надеваешь утром и показываешь, как весь день становится легче, приятнее и увереннее.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Слайд 16: Что мы говорим / НЕ говорим -->
+<div class="slide">
+  <div class="container">
+    <h1 class="accent">ЧТО МЫ ГОВОРИМ / НЕ ГОВОРИМ О КОСТЮМАХ <strong>NUEVA</strong></h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2rem;">
+      <div class="card">
+        <h2 style="color:#28a745;">Что мы говорим</h2>
+        <ul class="red-bullets">
+        <li>✔ Идеальный летний костюм для прогулок, пляжа, путешествий и дома</li>
+          <li>✔ Воплощение комфорта и стиля в одном комплекте</li>
+          <li>✔ Оверсайз-крой + мягкая жатая ткань — для жаркого лета</li>
+          <li>✔ Можно носить как комплект, так и отдельно — супер практично</li>
+          <li>✔ Полосатый принт добавляет современности и свежести</li>
+          <li>✔ Выглядит дорого, стильно и трендово, но доступно</li>
+          <li>✔ Отличный домашний костюм — мягко, уютно, дышаще</li>
+          <li>✔ Идеально для подарка — подойдёт любой девушке</li>
+          <li>✔ Легко сочетается с другими вещами гардероба</li>
+          <li>✔ Комфорт даже в самую жару — кожа дышит</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 style="color:#dc3545;">Что НЕ говорим</h2>
+        <ul class="red-bullets">
+          <li>✗ Костюм полностью заменяет верхнюю одежду (не для холодной погоды)</li>
+          <li>✗ Подходит для офиса / деловых встреч (стиль слишком расслабленный)</li>
+          <li>✗ Материал вообще не мнётся (жатая текстура может слегка меняться)</li>
+          <li>✗ Можно стирать в горячей воде / машинной сушке (соблюдайте рекомендации)</li>
+          <li>✗ Можно носить без нижнего белья (не рекомендуется)</li>
+          <li>✗ Не требует никакого ухода / глажки (нужна деликатная стирка)</li>
+          <li>✗ Этот костюм сделает вас визуально выше / стройнее (крой влияет на силуэт, но не на рост)</li>
+          <li>✗ 100% не просвечивает при любом освещении (ткань тонкая и лёгкая)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Слайд 17: Стратегия развития (подробная версия) -->
+<div class="slide">
+  <div class="container">
+    <h1 class="accent">СТРАТЕГИЯ РАЗВИТИЯ 2026–2027</h1>
+    <p class="small" style="margin:1rem 0 2rem; text-align:center; line-height:1.5;">
+      <strong>NUEVA</strong> 2026–2027: от уютного лета к постоянному бренду комфорта и стиля
+    </p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2rem;">
+      <div class="card">
+        <h2>2026: Фундамент роста и конверсии</h2>
+        <ul class="red-bullets">
+          <li>Переход к видео-first: 70% контента — Reels + длинные видео (до 3 мин) с демонстрацией костюмов в реальной жизни (пляж → дом → путешествие). Хуки в первые 3 секунды, сильный CTA в конце.</li>
+          <li>Запуск social commerce: Полные shoppable posts, Instagram Shop, теги продуктов на всех фото/Reels — цель: +40% продаж через IG, интеграция с WB для прямых покупок и отслеживания UTM.</li>
+          <li>Фокус на аутентичность: UGC от реальных покупательниц (stories "мой день в NUEVA", "как я ношу костюм дома"), микро-инфлюенсеры (5–50k) вместо мега-звёзд, бартеры, подарки за отзывы.</li>
+          <li>Сериализованный контент: еженедельные рубрики ("Неделя в Oversize", "Striped-челлендж: 7 дней 7 образов"), чтобы удерживать аудиторию, повышать время просмотра и стимулировать повторные покупки.</li>
+          <li>Цель по аудитории: +80–120k подписчиков за год, рост engagement rate до 4–6%, ежемесячный анализ топ-контента (что даёт больше сохранений/шеров/переходов на WB).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>2027: Масштабирование и лояльность</h2>
+        <ul class="red-bullets">
+          <li>Запуск амбассадор-программы: 20–30 постоянных клиенток-амбассадоров с эксклюзивными костюмами, скидками 15–25% за контент, ежемесячные встречи/вебинары для комьюнити, закрытый чат.</li>
+          <li>Интеграция AI + human touch: AI для генерации идей контента, анализа комментариев и таргетинга рекламы, но весь видимый контент — 100% человеческий (no obvious AI-generated), фокус на личных историях и эмоциях.</li>
+          <li>Расширение на cozy/nostalgia vibe: Кампании "Домашний уют без компромиссов", "Лето круглый год" — акцент на вечные базовые вещи, сезонные коллекции с элементами ностальгии (ретро-полоска, тёплые тона жатки).</li>
+          <li>Кросс-платформенный рост: IG → TikTok (короткие вертикальные видео), Pinterest (визуальные доски с луками костюмов), тестирование YouTube Shorts и VK для русскоязычной аудитории.</li>
+          <li>Цель: +200–300k подписчиков суммарно, повторные покупки 35–45%, LTV клиента ×2, запуск программы лояльности (скидки для постоянных, реферал-программа "Приведи подругу — получи костюм").</li>
+        </ul>
+      </div>
+    </div>
+    <div class="recommendation-block" style="margin-top:2.5rem;">
+      <p class="small" style="font-weight:500;">
+        Человеческий контент + доверие + продажи внутри платформы = устойчивый рост.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Финальный слайд: Контакты -->
+<div class="slide title-slide">
+  <div class="container">
+    <p class="promise">
+      Готовы к <strong>NUEVA</strong>?
+    </p>
+    <p style="font-size:2rem; margin:2rem 0; opacity:0.95;">
+      Контакты: <br>
+      Email: dev4onka5@yandex.ru <br>
+      Телефон: +7-916-622-03-06 <br>
+    
+    </p>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
