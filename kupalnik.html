@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Product Book • Капсула купальников <strong>NUEVA</strong></title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background:#f8f9fa; color:#1a1a1a; line-height:1.5;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+    .slides-wrapper { display:block; }
+    .slide {
+      min-height:100vh; width:100vw; padding:4vh 6vw;
+      display:flex; flex-direction:column; justify-content:flex-start; align-items:center;
+      page-break-after:always !important; break-after:page !important;
+      overflow-y:auto; overflow-x:hidden; position:relative;
+      background:linear-gradient(135deg, #E0F7FA 0%, #00A896 100%);
+      color:#1a1a1a !important;
+    }
+    .slide::after {
+      content:"Слайд " counter(slide);
+      position:absolute; bottom:1rem; right:2rem; font-size:0.9rem;
+      color:#aaa; opacity:0.5; pointer-events:none;
+    }
+    body { counter-reset:slide; }
+    .slide { counter-increment:slide; }
+    h1 { font-size:clamp(2.2rem,6vw,3.8rem); font-weight:800; letter-spacing:-0.02em; margin-bottom:1.2rem; text-align:center; line-height:1.1; }
+    h2 { font-size:clamp(1.6rem,4.5vw,2.4rem); font-weight:700; margin:1.5rem 0 1rem; text-align:center; }
+    .red { color:#00A896; }
+    .light { color:#444; }
+    .small { font-size:clamp(0.95rem,3vw,1.05rem); line-height:1.55; }
+    .tiny { font-size:clamp(0.8rem,2.5vw,0.88rem); line-height:1.4; }
+    .italic { font-style:italic; }
+    .title-slide {
+      background:linear-gradient(135deg,#E0F7FA 0%,#00A896 100%);
+      color:white; text-align:center; justify-content:center; min-height:100vh;
+    }
+    .title-slide h1 { font-size:clamp(3rem,10vw,5.2rem); margin-bottom:1.5rem; }
+    .title-slide .subtitle { font-size:clamp(1.6rem,5vw,2.4rem); opacity:0.95; }
+    .title-slide .slogan { font-size:clamp(1.4rem,4.5vw,2rem); margin-top:2.5rem; opacity:0.9; }
+    .promise { font-size:clamp(2rem,6vw,3.2rem); font-weight:700; text-align:center; max-width:95%; margin:0 auto; line-height:1.3; }
+    .container {
+      max-width:1100px; width:100%; margin:2vh auto;
+      background:rgba(255,255,255,0.94); border-radius:16px;
+      padding:clamp(1.5rem,4vw,3rem) clamp(1.5rem,5vw,4rem);
+      box-shadow:0 8px 32px rgba(0,0,0,0.2); backdrop-filter:blur(8px);
+      color:#1a1a1a !important;
+    }
+    .card {
+      background:white; border-radius:12px; padding:clamp(1rem,3vw,1.6rem);
+      box-shadow:0 4px 16px rgba(0,0,0,0.1); text-align:center; border:1px solid #eee;
+    }
+    .card h2 {
+      font-size:clamp(1.3rem,4vw,1.8rem); margin-bottom:0.8rem;
+      border-top:3px solid #00A896; padding-top:0.6rem;
+    }
+    .product-photo-vertical {
+      width:100%; height:clamp(280px,60vw,420px); overflow:hidden; border-radius:12px;
+      margin-bottom:1rem; box-shadow:0 4px 16px rgba(0,0,0,0.12);
+      border:2px solid #fff; background:#f8f9fa;
+    }
+    .product-photo-vertical img {
+      width:100%; height:100%; object-fit:cover; object-position:center;
+    }
+    .recommendation-block {
+      margin-top:2rem; padding:clamp(1rem,4vw,1.5rem);
+      background:rgba(255,245,245,0.85); border-radius:12px;
+      border:2px dashed #00A896; text-align:center;
+    }
+    .red-bullets {
+      list-style-type:disc; padding-left:1.5rem;
+      font-size:clamp(0.95rem,3vw,1.05rem); line-height:1.6;
+    }
+    .red-bullets li::marker { color:#00A896; }
+    .colors { display:flex; flex-wrap:wrap; gap:0.6rem; justify-content:center; font-size:clamp(0.85rem,2.8vw,0.95rem); }
+    .color-dot {
+      width:20px; height:20px; border-radius:50%; border:2px solid white;
+      box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    }
+    @media (max-width: 768px) {
+  .slide {
+    padding: 2vh 4vw;
+    min-height: auto;
+    height: auto;
+  }
+
+  .container {
+    padding: 1.5rem 1.2rem;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  h1 {
+    font-size: clamp(1.9rem, 7vw, 2.6rem) !important;
+    margin-bottom: 1rem !important;
+  }
+
+  h2 {
+    font-size: clamp(1.3rem, 5vw, 1.7rem) !important;
+  }
+
+  .product-photo-vertical {
+    height: clamp(320px, 75vw, 420px) !important;
+    margin: 0 auto 1.2rem !important;
+  }
+
+  .card {
+    padding: 1.1rem 1.2rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* Для слайда 21 — два столбца → один */
+  .slide .container > div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.4rem !important;
+  }
+
+  .red-bullets, .small, .tiny {
+    font-size: 0.97rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Уменьшаем отступы между блоками */
+  div[style*="display:grid"][style*="gap"] {
+    gap: 1.2rem !important;
+  }
+
+  /* Ссылки и кнопки крупнее для пальцев */
+  a {
+    padding: 0.4rem 0;
+    font-size: 1.05rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .slide {
+    padding: 1.5vh 3.5vw;
+  }
+  .container {
+    padding: 1.2rem 1rem;
+  }
+  h1 {
+    font-size: clamp(1.7rem, 8.5vw, 2.3rem) !important;
+  }
+}
+  </style>
+</head>
+<body>
+<div class="slides-wrapper">
+
+<!-- Слайд 1: Титульный -->
+<div class="slide title-slide">
+  <div class="container">
+    <h1>Product Book<br>Капсула купальников<br><strong>NUEVA</strong></h1>
+    <div class="subtitle">Брендовые раздельные купальники</div>
+    <div class="slogan italic"><strong>NUEVA</strong> — твоя одежда для пляжного комфорта и стиля. Без жертв. Без переплат.</div>
+  </div>
+</div>
+
+<!-- Слайд 2: Обзор -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">Обзор капсулы купальников</h1>
+    <p class="small" style="margin:2rem 0 3rem;">
+      <strong>NUEVA</strong> — купальники, которые делают пляжный отдых комфортным, а образ стильным.<br>
+      Универсальность: подходит для разных типов фигур.<br>
+      Утончённый дизайн + регулируемые детали + стойкие материалы.<br>
+      <strong>3 категории: Купальник с фурнитурой | Купальник с фурнитурой и драпировкой | Купальник с завязками</strong>.
+    </p>
+    <p class="small light" style="margin-top:4rem; text-align:center;">
+      Фокус на уверенности и трендах без переплат
+    </p>
+  </div>
+</div>
+
+<!-- Слайд 3: "Купальник с фурнитурой" -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">"Купальник с фурнитурой"</h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2rem;">
+      <div class="card">
+        <h2>Раздельный купальник</h2>
+        <p>Утончённый дизайн, утончённая посадка, эластичная ткань с шиммером. Изумрудный оттенок, металлическая перемычка, регулируемые бретели.</p><br>
+        <div class="colors">
+          <span class="color-dot" style="background:#0F3F2E;"></span> Изумрудный
+          <span class="color-dot" style="background:#4E342E;"></span> Шоколадный + металлическая фурнитура золотого цвета
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Слайд 4: "Купальник с фурнитурой и драпировкой" -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">"Купальник с фурнитурой и драпировкой"</h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2rem;">
+      <div class="card">
+        <h2>Раздельный купальник</h2>
+        <p>Трендовые оттенки, центральная металлическая пряжка, драпировка на чашечках, регулируемые завязки.</p><br>
+        <div class="colors">
+          <span class="color-dot" style="background:#7A8F3A;"></span> Фисташковый
+          <span class="color-dot" style="background:#000000;"></span> Чёрный
+          <span class="color-dot" style="background:#001F3F;"></span> Синий + золотая пряжка
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Слайд 5: "Купальник с завязками" -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">"Купальник с завязками"</h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2rem;">
+      <div class="card">
+        <h2>Раздельный купальник</h2>
+        <p>Классический леопардовый принт на бежевой основе, минималистичный крой, тонкие бретели, плавки средней посадки.</p><br>
+        <div class="colors">
+          <span class="color-dot" style="background:#D2B48C;"></span> Леопардовый принт + бежевая основа
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Слайд 6: Целевая аудитория -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">Целевая аудитория</h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:2rem; margin-top:1.5rem;">
+      <div class="card">
+        <h2>Возраст</h2>
+        <p>Женщины и девушки 18–45 лет</p>
+      </div>
+      <div class="card">
+        <h2>Ценности</h2>
+        <p>Ценят стиль, комфорт, тренды и уверенность</p>
+      </div>
+      <div class="card">
+        <h2>Потребности</h2>
+        <p>Ищут купальники для пляжа, бассейна, фотосессий, отдыха</p>
+      </div>
+      <div class="card">
+        <h2>Покупки</h2>
+        <p>Покупают на WB</p>
+      </div>
+      <div class="card" style="grid-column:span 2; max-width:70%; margin:0 auto;">
+        <h2>Критерии выбора</h2>
+        <p>Соотношение цена/качество/эстетика</p>
+      </div>
+    </div>
+    <p class="small light italic" style="margin-top:3.5rem; text-align:center; font-size:1.1rem;">
+      <strong>NUEVA</strong> — для женщин, которые хотят выглядеть и чувствовать себя уверенно на пляже
+    </p>
+  </div>
+</div>
+
+<!-- Слайд 7: УТП -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">УТП</h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:2rem; margin-top:1.5rem;">
+      <div class="card">
+        <h2>Комфорт</h2>
+        <p>Дышащий материал без дискомфорта<br>Женственный силуэт<br>Создаёт эффект идеальной посадки</p>
+      </div>
+      <div class="card">
+        <h2>Ткани</h2>
+        <p>Эластичные с шиммером, стойкие к выцветанию</p>
+      </div>
+      <div class="card">
+        <h2>Поддержка</h2>
+        <p>Регулируемые завязки и драпировка</p>
+      </div>
+      <div class="card">
+        <h2>Размеры</h2>
+        <p>Универсальные</p>
+      </div>
+      <div class="card">
+        <h2>Цвета/фасоны</h2>
+        <p>Трендовые (изумрудный, фисташковый, леопардовый)</p>
+      </div>
+      <div class="card">
+        <h2>Цена</h2>
+        <p>Доступная, выглядит премиум</p>
+      </div>
+    </div>
+    <p class="small light italic" style="margin-top:3.5rem; text-align:center; font-size:1.1rem;">
+      <strong>NUEVA</strong> — премиум комфорт по доступной цене
+    </p>
+  </div>
+</div>
+
+<!-- Слайд 8: Позиционирование -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red" style="margin-bottom:2.5rem; font-size:3.6rem; text-align:center;">
+      ПОЗИЦИОНИРОВАНИЕ <strong>NUEVA</strong>
+    </h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2rem;">
+      <div class="card">
+        <h2><strong>NUEVA</strong></h2>
+        <ul class="red-bullets">
+          <li>✔ Комфорт без дискомфорта, эластичная ткань</li>
+          <li>✔ Дышащие, не выцветают на солнце</li>
+          <li>✔ С регулируемыми деталями</li>
+          <li>✔ Универсальные размеры</li>
+          <li>✔ Трендовые, универсальные</li>
+          <li>✔ Доступная цена</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Аналоги</h2>
+        <ul class="red-bullets">
+          <li>✗ Могут быть неудобными в воде</li>
+          <li>✗ Выцветают и теряют форму</li>
+          <li>✗ Без регулировки</li>
+          <li>✗ Ограниченные размеры</li>
+          <li>✗ Трендовые</li>
+          <li>✗ Высокая цена</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Слайд 9: Тональность бренда -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">Тональность бренда</h1>
+    <ul class="red-bullets" style="font-size:1.1rem;">
+      <li>Дружелюбная, уверенная, поддерживающая подруга.</li>
+      <li>Честная — о реальных фигурах.</li>
+      <li>Слегка дерзкая — лучший стиль за свои деньги.</li>
+    </ul>
+    <p style="margin-top:2rem; font-size:1.1rem;">
+      Примеры: «Не прячься — подчеркни. NUEVA сидит так, будто для тебя.»<br>
+      «После моря — как новое. Реально.»<br>
+      Не говорим: «Заменит все купальники», «Не выцветает вообще».
+    </p>
+  </div>
+</div>
+
+<!-- Слайд 10: Brand Promise -->
+<div class="slide title-slide">
+  <div class="container">
+    <p class="promise">
+      <strong>NUEVA</strong> — твой купальник для лета,<br>
+      который делает образ стильным,<br>
+      а тебя — уверенной.<br><br>
+    </p>
+  </div>
+</div>
+
+<!-- Слайд 11: Цветовая палитра -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">Цветовая палитра <strong>NUEVA</strong></h1>
+    <p class="small" style="margin:1rem 0 2rem; text-align:center;">
+      Трендовые и универсальные оттенки для твоего пляжного образа
+    </p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:2rem;">
+      <div class="swatch-card">
+        <div class="swatch" style="background:#000000; width:140px; height:140px; margin:0 auto 1rem;"></div>
+        <h3 style="text-align:center;">Чёрный</h3>
+        <p class="tiny" style="text-align:center;">
+          угольный · антрацитовый · графитовый · смоляной · ночной · чёрный бархат · эбеновый · ониксовый · чёрный матовый · чёрный шёлк · классический чёрный · строгий · глубокий чёрный · чёрный агат
+        </p>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch" style="background:#0F3F2E; width:140px; height:140px; margin:0 auto 1rem;"></div>
+        <h3 style="text-align:center;">Зелёный (изумрудный)</h3>
+        <p class="tiny" style="text-align:center;">
+          изумрудный · нефритовый · малахитовый · хвойный · лесной · травяной · мятный · бирюзовый · аквамариновый · салатовый
+        </p>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch" style="background:#001F3F; width:140px; height:140px; margin:0 auto 1rem;"></div>
+        <h3 style="text-align:center;">Синий</h3>
+        <p class="tiny" style="text-align:center;">
+          морской · индиго · лазурный · кобальтовый · синий бархат · синий джинс · синий океан · синий сапфир · синий ультрамарин · синий электрик
+        </p>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch" style="background:#4E342E; width:140px; height:140px; margin:0 auto 1rem;"></div>
+        <h3 style="text-align:center;">Шоколадный</h3>
+        <p class="tiny" style="text-align:center;">
+          какао · мокко · тёмный шоколад · шоколадный брауни · кофе с молоком · эспрессо · каштановый · трюфельный · шоколадно-карамельный · нуга
+        </p>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch" style="background:#7A8F3A; width:140px; height:140px; margin:0 auto 1rem;"></div>
+        <h3 style="text-align:center;">Фисташковый</h3>
+        <p class="tiny" style="text-align:center;">
+          фисташковый · мятный · лаймовый · пастельно-зелёный · салатовый · яблочный · оливковый · хаки · светло-зелёный · свежий зелёный
+        </p>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch" style="background:#D2B48C; width:140px; height:140px; margin:0 auto 1rem;"></div>
+        <h3 style="text-align:center;">Леопардовый</h3>
+        <p class="tiny" style="text-align:center;">
+          леопардовый · животный принт · хищный · классический леопард · пятнистый · сафари · дикий · леопардовый принт · бежевый леопард · нюдовый леопард
+        </p>
+      </div>
+    </div>
+    <p class="small light italic" style="margin-top:2rem; text-align:center;">
+      Эти оттенки — основа капсулы. Они легко сочетаются между собой и с любым гардеробом.
+    </p>
+    <div class="recommendation-block" style="margin-top:2.5rem;">
+      <p class="small" style="font-weight:500;">
+        Рекомендация по карточкам WB / Ozon / Instagram:<br>
+        Чередуйте синонимы в заголовках →<br>
+        «Купальник изумрудный» • «Купальник фисташковый» • «Купальник <strong>NUEVA</strong> леопардовый»
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Слайд 12: Купальник с фурнитурой -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">Купальник с фурнитурой</h1>
+    <p class="small" style="text-align:center; margin-bottom:1rem;">Изумрудный/шоколадный, эластичная ткань с шиммером, металлическая перемычка.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(470px,1fr)); gap:1.5rem;">
+      <div class="card">
+        <div class="product-photo-vertical"><img src="https://moscvi4ka.github.io/nuevaproductbook/hf_jsdgfcdjmshdgfmsjb.png" alt="Купальник с фурнитурой"></div>
+        <!-- Ссылка на товар -->
+    <p style="text-align:center; margin:0 0 2rem 0; font-size:1.05rem; font-weight:500;">
+      <a href="https://www.wildberries.ru/catalog/154430682/detail.aspx" target="_blank" style="color:#00A896; text-decoration:none; border-bottom:2px solid #00A896;">
+        Перейти к товару на Wildberries →
+      </a>
+    </p>
+<h2>Универсальность</h2>
+        <p>Пляж, бассейн, фотосессии, загар, купание, прогулки. Регулируемые завязки для идеальной посадки. Быстро сохнет.</p>
+      </div>
+      <div class="card">
+        <h2>Экспертные смыслы</h2>
+        <p>Эластичная ткань с блеском, обеспечивает облегание. Металлическая перемычка из сплава цинка с защитой от коррозии. Регулируемые бретели, плавки бразильяна.</p>
+      </div>
+      <div class="card">
+        <h2>Проблемы и решения</h2>
+        <ul class="red-bullets tiny">
+          <li>Несовершенная посадка: Регулировка для подгонки.</li>
+          <li>Отсутствие поддержки: Драпировка без косточек.</li>
+          <li>Выцветание: УФ-защита.</li>
+          <li>Деформация: Эластан держит форму.</li>
+          <li>Коррозия: Защитное покрытие.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Сильные стороны</h2>
+        <ul class="red-bullets tiny">
+          <li>Моделирование силуэта.</li>
+          <li>Эстетика для фото.</li>
+          <li>Долговечность.</li>
+          <li>Коррекция пропорций.</li>
+          <li>Удобство для загара.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Практичность и уход</h2>
+        <p>Быстро сохнет, стойкий к выцветанию. Металл с защитой. Деликатная стирка 30°C, полоскание после моря, сушка в тени.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Слайд 13: Купальник с фурнитурой и драпировкой -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">Купальник с фурнитурой и драпировкой</h1>
+    <p class="small" style="text-align:center; margin-bottom:1rem;">Фисташковый/черный/синий, центральная пряжка, драпировка на чашечках.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(470px,1fr)); gap:1.5rem;">
+      <div class="card">
+        <div class="product-photo-vertical"><img src="https://moscvi4ka.github.io/nuevaproductbook/hf_20260129_071226_2b35686d-c241-4c0e-a3e5-988f9b134bab.png" alt="Купальник с фурнитурой и драпировкой"></div>
+        <!-- Ссылка на товар -->
+    <p style="text-align:center; margin:0 0 2rem 0; font-size:1.05rem; font-weight:500;">
+      <a href="https://www.wildberries.ru/catalog/323588336/detail.aspx?targetUrl=EX" target="_blank" style="color:#00A896; text-decoration:none; border-bottom:2px solid #00A896;">
+        Перейти к товару на Wildberries →
+      </a>
+    </p>
+
+        <h2>Универсальность</h2>
+        <p>Пляж, бассейн, фотосессии, загар, купание. Регулируемые завязки. Лиф как топ, драпировка для объема.</p>
+      </div>
+      <div class="card">
+        <h2>Экспертные смыслы</h2>
+        <p>Пряжка из нержавеющей стали, драпировка создает объем без вставок. Завязки на шее/боках с наконечниками. Универсальная посадка плавок.</p>
+      </div>
+      <div class="card">
+        <h2>Проблемы и решения</h2>
+        <ul class="red-bullets tiny">
+          <li>Актуальный цвет: Фисташковый тренд 2026.</li>
+          <li>Размер груди: Драпировка для увеличения.</li>
+          <li>Дискомфорт поролона: Естественная поддержка.</li>
+          <li>Посадка плавок: Регулируемые завязки.</li>
+          <li>Выцветание: Стойкое окрашивание.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Сильные стороны</h2>
+        <ul class="red-bullets tiny">
+          <li>Эффект трендсеттера.</li>
+          <li>Визуальное увеличение груди.</li>
+          <li>Фотогеничность.</li>
+          <li>Универсальность образов.</li>
+          <li>Комфорт без компромиссов.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Практичность и уход</h2>
+        <p>Стойкий цвет, сохраняет форму. Деликатная стирка 30°C, полоскание после моря, сушка в тени.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Слайд 14: Купальник с завязками -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">Купальник с завязками</h1>
+    <p class="small" style="text-align:center; margin-bottom:1rem;">Изумрудный/шоколадный, эластичная ткань с шиммером, металлическая перемычка.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem;">
+      <div class="card">
+        <div class="product-photo-vertical"><img src="https://moscvi4ka.github.io/nuevaproductbook/71d6dd45-c10d-4882-aea2-183269894cbe.png" alt="Купальник с фурнитурой"></div>
+        <!-- Ссылка на товар -->
+    <p style="text-align:center; margin:0 0 2rem 0; font-size:1.05rem; font-weight:500;">
+      <a href="https://www.wildberries.ru/catalog/251487929/detail.aspx" target="_blank" style="color:#00A896; text-decoration:none; border-bottom:2px solid #00A896;">
+        Перейти к товару на Wildberries →
+      </a>
+    </p>
+
+        <h2>Универсальность</h2>
+        <p>Пляж, бассейн, яхта, фотосессии, загар, прогулки. Средняя посадка для удлинения ног.</p>
+      </div>
+      <div class="card">
+        <h2>Экспертные смыслы</h2>
+        <p>Верх на завязках удлиняет шею. Плавки средней посадки с завязками. Минималистичный крой без лишних деталей.</p>
+      </div>
+      <div class="card">
+        <h2>Проблемы и решения</h2>
+        <ul class="red-bullets tiny">
+          <li>Короткие ноги: Высокий вырез для удлинения.</li>
+          <li>Тренды: Вечный леопардовый принт.</li>
+          <li>Широкие плечи: Тонкие бретели для баланса.</li>
+          <li>Область живота: Средняя талия для подчеркивания.</li>
+          <li>Бледная кожа: Бежевая основа для иллюзии загара.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Сильные стороны</h2>
+        <ul class="red-bullets tiny">
+          <li>Удлинение силуэта.</li>
+          <li>Проявление уверенности.</li>
+          <li>Эффект загара.</li>
+          <li>Вневременной стиль.</li>
+          <li>Фотогеничность.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Практичность и уход</h2>
+        <p>Принт не выцветает, ткань держит форму. Деликатная стирка 30°C, полоскание после моря, сушка в тени.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Слайд 15: СОЧЕТАНИЕ С НАРЯДАМИ -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">СОЧЕТАНИЕ С НАРЯДАМИ</h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2rem; margin-top:1.5rem;">
+      <div class="card">
+        <h2>Купальник с фурнитурой</h2>
+        <ul class="red-bullets">
+          <li>Белая/бежевая шифоновая юбка макси — элегантный выходной лук</li>
+          <li>Лёгкая белая рубашка навыпуск — стильный пляжный casual</li>
+          <li>Джинсовые шорты оверсайз — расслабленный городской образ</li>
+          <li>Пляжное платье-туника в нейтральных тонах — для прогулок по набережной</li>
+          <li>Кроп-топ + юбка миди — вечерний вариант для ужина на террасе</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Купальник с фурнитурой и драпировкой</h2>
+        <ul class="red-bullets">
+          <li>Льняная юбка миди пастельных оттенков — нежный летний лук</li>
+          <li>Белая oversize-рубашка — минималистичный и свежий образ</li>
+          <li>Джинсовые шорты средней длины — для активного дня</li>
+          <li>Пляжное платье-туника в белом или бежевом — универсально для отдыха</li>
+          <li>Короткий сарафан на тонких бретелях — романтичный вечерний вариант</li>
+        </ul>
+      </div>
+      <div class="card" style="grid-column: 1 / -1; justify-self: center; max-width: 500px; margin: 1rem auto 1rem auto; padding: 2rem 1.8rem;">
+        <h2>Купальник с завязками</h2>
+        <ul class="red-bullets">
+          <li>Бежевое/песочное парео или туника — нейтральный баланс принта</li>
+          <li>Белая льняная рубашка — классика для города и пляжа</li>
+          <li>Чёрные шорты или брюки палаццо — смелый контрастный лук</li>
+          <li>Пляжное платье с открытой спиной — для вечерних выходов</li>
+          <li>Джинсовая юбка мини — дерзкий городской стиль</li>
+        </ul>
+      </div>
+    </div>
+    <div class="recommendation-block">
+      <p class="small" style="font-size:1.15rem; font-weight:600; color:#00A896;">
+        Рекомендации:<br>
+        Выбирайте нейтральные цвета (белый, бежевый, чёрный) для баланса.<br>
+        Добавляйте лёгкие ткани (шифон, лён) для ощущения лета.<br>
+        Это превращает купальник в универсальный топ или базу для образа.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Слайд 17: СОЧЕТАНИЕ С АКСЕССУАРАМИ -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">СОЧЕТАНИЕ С АКСЕССУАРАМИ</h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2rem; margin-top:1.5rem;">
+      <div class="card">
+        <h2>Купальник с фурнитурой</h2>
+        <ul class="red-bullets">
+          <li>Золотые серьги-каффы и браслеты — подчёркивают золотую перемычку</li>
+          <li>Солнцезащитные очки в золотой оправе — премиум-акцент</li>
+          <li>Пляжная сумка-соломка или клатч с золотыми деталями</li>
+          <li>Тонкая золотая цепочка на шею — минималистично и элегантно</li>
+          <li>Пляжные сандалии с золотыми ремешками</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Купальник с фурнитурой и драпировкой</h2>
+        <ul class="red-bullets">
+          <li>Серебряные серьги и кольца — контраст с золотой пряжкой</li>
+          <li>Крупные солнцезащитные очки в чёрной или серебряной оправе</li>
+          <li>Пляжная сумка-тоут в пастельных тонах</li>
+          <li>Тонкий серебряный чокер или цепочка — акцент на шее</li>
+          <li>Босоножки или эспадрильи в белом/бежевом</li>
+        </ul>
+      </div>
+      <div class="card" style="grid-column: 1 / -1; justify-self: center; max-width: 500px; margin: 1rem auto 1rem auto; padding: 2rem 1.8rem;">
+        <h2>Купальник с завязками</h2>
+        <ul class="red-bullets">
+          <li>Золотые цепочки и крупные серьги — усиливают животный принт</li>
+          <li>Солнцезащитные очки в чёрной оправе — классический контраст</li>
+          <li>Пляжная сумка из кожи или рафии в бежевом/чёрном</li>
+          <li>Золотые браслеты и кольца — для смелого образа</li>
+          <li>Босоножки на каблуке или плоские сандалии в золотом/чёрном</li>
+        </ul>
+      </div>
+    </div>
+    <div class="recommendation-block">
+      <p class="small" style="font-size:1.15rem; font-weight:600; color:#00A896;">
+        Рекомендации:<br>
+        Золото усиливает премиум-вид (особенно для изумрудного и леопардового).<br>
+        Серебро добавляет свежести фисташковому.<br>
+        Нейтральные сумки и очки — база, которая не перебивает купальник.<br>
+        Эти сочетания позволяют носить купальник не только на пляже, но и в городе.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- Слайд 18: Смыслы для "Купальник с фурнитурой" -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">Смыслы для контента по изделиям</h1>
+    <h2>"Купальник с фурнитурой"</h2>
+    <ul class="red-bullets" style="font-size:1.1rem; line-height:1.6">
+      <li>«Утончённый изумруд для идеальной посадки» Показываешь, как регулируешь бретели и боковые стяжки для фигуры как на заказ — комфорт без дискомфорта.</li>
+      <li>«Металлическая перемычка — акцент стиля» Демонстрируешь, как золотая деталь собирает ткань и формирует силуэт — элегантно и практично.</li>
+      <li>«Быстро сохнет после моря» Надеваешь после купания и показываешь, как ткань высыхает за минуты без деформации.</li>
+      <li>«Стойкий цвет на солнце» Показываешь купальник до и после сезона — изумрудный оттенок остаётся насыщенным.</li>
+      <li>«Драпировка для красивой формы» Снимаешь крупный план, как драпировка визуально приподнимает грудь без косточек.</li>
+      <li>«Регулируемые завязки для любой фигуры» Демонстрируешь, как меняешь посадку от низкой до высокой — универсально.</li>
+      <li>«Золото не ржавеет в воде» Показываешь фурнитуру после солёной воды — остаётся как новая.</li>
+      <li>«Идеально для фотосессий» Надеваешь и показываешь, как пропорции выглядят модельно в кадре.</li>
+      <li>«Комфорт в жару без поролона» Показываешь, как ткань дышит и не парится даже в +35.</li>
+      <li>«Высокая посадка удлиняет ноги» Демонстрируешь, как плавки визуально добавляют роста.</li>
+      <li>«Премиум за доступную цену» Сравниваешь с аналогами и показываешь, как выглядит дорого без переплат.</li>
+      <li>«После стирки как новый» Показываешь форму после 50 стирок — без растяжений.</li>
+      <li>«Для загара без следов» Надеваешь и показываешь ровный загар благодаря дизайну без бретелей.</li>
+      <li>«Универсальный для бассейна и моря» Демонстрируешь стойкость к хлору и соли — цвет не вымывается.</li>
+      <li>«Элегантность в простоте» Показываешь минималистичный дизайн без лишних деталей — стильно и практично.</li>
+      <li>«Поддержка без косточек» Надеваешь и показываешь, как держит форму естественно.</li>
+      <li>«Золото не нагревается на солнце» Демонстрируешь, как фурнитура комфортна в жару.</li>
+      <li>«Идеально для путешествий» Показываешь компактность в сумке и быстрое высыхание.</li>
+      <li>«Трендовый изумруд для любого загара» Надеваешь на разные типы кожи и показываешь, как оттеняет загар.</li>
+      <li>«Шоколадный для элегантности» Показываешь, как оттенок добавляет глубины и сочетается с золотом.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Слайд 19: Смыслы для "Купальник с фурнитурой и драпировкой" -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">Смыслы для контента по изделиям</h1>
+    <h2>"Купальник с фурнитурой и драпировкой"</h2>
+    <ul class="red-bullets" style="font-size:1.1rem; line-height:1.6">
+      <li>«Трендовый фисташковый для сезона» Показываешь, как оттенок сочетается с загаром и выглядит стильно на фото.</li>
+      <li>«Драпировка добавляет объёма» Демонстрируешь, как сборки визуально увеличивают грудь на 0.5-1 размер.</li>
+      <li>«Металлическая пряжка — центральный акцент» Показываешь, как золотая деталь собирает ткань и формирует декольте.</li>
+      <li>«Завязки для идеальной посадки» Надеваешь и регулируешь боковые завязки от низкой до средней.</li>
+      <li>«Быстро сохнет без деформации» Показываешь после купания — форма остаётся как новая.</li>
+      <li>«Стойкий цвет к выцветанию» Демонстрируешь до и после солнца — фисташковый остаётся насыщенным.</li>
+      <li>«Лиф как отдельный топ» Надеваешь с юбкой и показываешь casual-образ для пляжа.</li>
+      <li>«Без поролона — комфорт в жару» Показываешь, как ткань дышит и не парится.</li>
+      <li>«Регулировка на шее для поддержки» Демонстрируешь, как завязки меняют высоту лифа.</li>
+      <li>«Универсальные завязки на боках» Надеваешь и показываешь разные варианты посадки плавок.</li>
+      <li>«Драпировка для симметрии» Показываешь, как скрывает асимметрию и создаёт баланс.</li>
+      <li>«Золотая пряжка не ржавеет» Демонстрируешь после морской воды — остаётся блестящей.</li>
+      <li>«Фисташковый — тренд 2026» Показываешь сочетания с аксессуарами для модных луков.</li>
+      <li>«Минимализм для любого случая» Надеваешь и показываешь от бассейна до вечеринки.</li>
+      <li>«После стирки сохраняет форму» Показываешь, как драпировка не теряет вида.</li>
+      <li>«Идеально для фотосессий» Демонстрируешь, как цвет выигрывает на любом фоне.</li>
+      <li>«Комфорт без компромиссов» Показываешь свободу движений в жару.</li>
+      <li>«Боковые завязки для кастомизации» Надеваешь и регулируешь для разных фигур.</li>
+      <li>«Золото добавляет роскоши» Показываешь, как пряжка делает образ дорогим.</li>
+      <li>«Чёрный для классики» Показываешь, как оттенок добавляет глубины и сочетается с золотом.</li>
+      <li>«Синий для свежести» Показываешь, как оттенок освежает и выглядит трендово.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Слайд 20: Смыслы для "Купальник с завязками" -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">Смыслы для контента по изделиям</h1>
+    <h2>"Купальник с завязками"</h2>
+    <ul class="red-bullets" style="font-size:1.1rem; line-height:1.6">
+      <li>«Вечный леопард для смелых» Показываешь, как принт добавляет уверенности и выглядит стильно.</li>
+      <li>«Высокий вырез удлиняет ноги» Демонстрируешь, как плавки визуально добавляют 5-7 см роста.</li>
+      <li>«Тонкие бретели для минимализма» Надеваешь и показываешь открытую линию плеч.</li>
+      <li>«Средняя посадка скрывает живот» Показываешь, как талия подчёркивает изгибы.</li>
+      <li>«Бежевая основа для загара» Демонстрируешь, как создаёт иллюзию загорелой кожи.</li>
+      <li>«Минималистичный крой без лишнего» Надеваешь и показываешь универсальность.</li>
+      <li>«Леопард сочетается с золотом» Сочетаешь с аксессуарами и показываешь луки.</li>
+      <li>«Принт не надоедает» Показываешь вечную классику на разных образах.</li>
+      <li>«Тонкие бретели не впиваются» Демонстрируешь комфорт для большой груди.</li>
+      <li>«Бежевая гамма для любого типа» Надеваешь на блондинок, брюнеток и показываешь гармонию.</li>
+      <li>«Средний вырез балансирует пропорции» Показываешь эффект песочных часов.</li>
+      <li>«Леопард для фотогеничности» Демонстрируешь, как выглядит в кадре премиум.</li>
+      <li>«Бретели за шею удлиняют силуэт» Надеваешь и показываешь визуальное стройнение.</li>
+      <li>«Принт на бежевой основе не вульгарен» Показываешь деликатность дизайна.</li>
+      <li>«Универсально для пляжа и яхты» Надеваешь и показываешь разные сценарии.</li>
+      <li>«После стирки принт чёткий» Демонстрируешь стойкость после 50 стирок.</li>
+      <li>«Леопард добавляет грации» Показываешь движение в купальнике.</li>
+      <li>«Бежевая основа — эффект загара» Надеваешь на светлую кожу и показываешь трансформацию.</li>
+      <li>«Минимализм подчёркивает фигуру» Показываешь, как крой акцентирует формы.</li>
+      <li>«Вечная классика для гардероба» Демонстрируешь, как не устаревает через сезоны.</li>
+      <li>«Тонкие бретели для открытой спины» Надеваешь и показываешь элегантность.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Слайд 21: Каналы и точки контакта (переписанный как в боди) -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">Каналы и точки контакта</h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2rem; margin-top:1.5rem;">
+      <div class="card">
+        <h2>Основной</h2>
+        <p>Wildberries</p>
+      </div>
+      <div class="card">
+        <h2>Instagram</h2>
+        <p>@nueva_brand — UGC, отзывы, behind-the-scenes</p>
+      </div>
+      <div class="card">
+        <h2>Упаковка</h2>
+        <p>Фирменные бирки</p>
+      </div>
+      <div class="card">
+        <h2>Отзывы</h2>
+        <p>Активно собираем и репостим</p>
+      </div>
+    </div>
+    <p class="small light italic" style="margin-top:3.5rem; text-align:center; font-size:1.1rem;">
+      Каждая точка контакта усиливает доверие к <strong>NUEVA</strong>
+    </p>
+  </div>
+</div>
+
+<!-- Слайд 21: Что мы говорим / НЕ говорим (сокращённая версия) -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red" style="margin-bottom:1.8rem;">Что мы говорим / НЕ говорим о купальниках NUEVA</h1>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; max-width:1100px; margin:0 auto;">
+      
+      <!-- Что говорим (зелёный акцент) -->
+      <div class="card" style="background:rgba(0,168,150,0.08); border:1px solid #00A896; padding:1.6rem;">
+        <h2 style="color:#00A896; margin-bottom:1.2rem;">✔ Говорим</h2>
+        <ul class="red-bullets small" style="line-height:1.7; margin:0;">
+          <li>Этот изумрудный оттенок невероятно красиво смотрится на любой коже</li>
+          <li>Металлическая перемычка — не просто декор, а функциональный элемент</li>
+          <li>Верх можно регулировать под себя</li>
+          <li>После моря цвет остался ярким</li>
+          <li>Драпировка визуально добавляет объём</li>
+          <li>Золотые детали не потемнели от воды</li>
+          <li>Купальник держит форму после стирки</li>
+          <li>Высокая посадка удлиняет ноги</li>
+          <li>В этом купальнике фото получаются потрясающими</li>
+          <li>Ткань быстро сохнет и не просвечивает</li>
+          <li>Фисташковый — главный цвет сезона</li>
+          <li>Леопард — вечная классика</li>
+        </ul>
+      </div>
+
+      <!-- Что НЕ говорим (серый/красный акцент) -->
+      <div class="card" style="background:rgba(0,0,0,0.04); border:1px solid #ccc; padding:1.6rem;">
+        <h2 style="color:#666; margin-bottom:1.2rem;">✗ НЕ говорим</h2>
+        <ul class="small" style="line-height:1.7; margin:0; color:#555;">
+          <li>Корректирует фигуру / убирает килограммы</li>
+          <li>Подходит абсолютно всем</li>
+          <li>Металл никогда не потемнеет</li>
+          <li>Не выцветает совсем</li>
+          <li>Заменяет пуш-ап / увеличивает грудь физически</li>
+          <li>Леопард идёт всем</li>
+          <li>Можно стирать в машинке без последствий</li>
+          <li>Не требует полоскания</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="small light italic" style="text-align:center; margin-top:2.5rem; font-size:1.05rem;">
+      Честность и уверенность — наш главный тон
+    </p>
+  </div>
+</div>
+
+
+<!-- Слайд 23: Стратегия развития -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red">СТРАТЕГИЯ РАЗВИТИЯ 2026–2027</h1>
+    <p class="small" style="margin:1rem 0 2rem; text-align:center; line-height:1.5;">
+      <strong>NUEVA</strong> 2026–2027: от пляжного тренда к постоянному бренду комфорта и стиля
+    </p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2rem;">
+      <div class="card">
+        <h2>2026: Фундамент роста и конверсии</h2>
+        <ul class="red-bullets">
+          <li>Переход к видео-first: 70% контента — Reels + длинные видео (до 3 мин) с демонстрацией купальников в реальной жизни (пляж → бассейн → фотосессия).</li>
+          <li>Запуск social commerce: Полные shoppable posts, Instagram Shop, теги продуктов на всех фото/Reels — цель: +40% продаж через IG.</li>
+          <li>Фокус на аутентичность: UGC от реальных покупательниц (stories "мой день в NUEVA"), микро-инфлюенсеры (5–50k) вместо мега-звёзд.</li>
+          <li>Сериализованный контент: еженедельные рубрики ("Неделя в купальнике", "Леопард-челлендж: 7 образов").</li>
+          <li>Цель по аудитории: +80–120k подписчиков, рост engagement rate до 4–6%.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>2027: Масштабирование и лояльность</h2>
+        <ul class="red-bullets">
+          <li>Запуск амбассадор-программы: 20–30 постоянных клиенток-амбассадоров с эксклюзивными купальниками и скидками за контент.</li>
+          <li>Интеграция AI + human touch: AI для идей и таргетинга, но весь видимый контент — 100% человеческий (no obvious AI-generated).</li>
+          <li>Расширение на cozy/nostalgia vibe: Кампании "Пляжный уют без компромиссов", "Лето круглый год" — акцент на вечные базовые купальники.</li>
+          <li>Кросс-платформенный рост: IG → TikTok + Pinterest (визуальные доски с купальниками).</li>
+          <li>Цель: +200–300k подписчиков, повторные покупки 35–45%, LTV клиента ×2.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="recommendation-block" style="margin-top:2.5rem;">
+      <p class="small" style="font-weight:500;">
+        Человеческий контент + доверие + продажи внутри платформы = устойчивый рост.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Слайд 24: Задачи по Instagram на 2026 -->
+<div class="slide">
+  <div class="container">
+    <h1 class="red" style="margin-bottom:2.5rem; font-size:3.6rem; text-align:center;">
+      ЗАДАЧИ ПО INSTAGRAM НА 2026
+    </h1>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2rem; margin-top:1.5rem;">
+      <div class="card">
+        <h2>1. Контент и форматы (ежемесячно)</h2>
+        <ul class="red-bullets">
+          <li>20–25 Reels + 8–10 каруселей + 4–6 длинных видео (до 90 сек).</li>
+          <li>60% — демонстрация купальников в движении/реальной жизни (пляж, бассейн, фотосессии).</li>
+          <li>30% — UGC + репосты клиенток.</li>
+          <li>10% — образовательный/сериализованный контент ("Как носить леопардовый 7 способов").</li>
+          <li>Обязательно: сильные хуки в первые 3 секунды, призывы к DM/комментариям.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>2. Рост аудитории и engagement</h2>
+        <ul class="red-bullets">
+          <li>Цель: +8–12k новых подписчиков в месяц (итого +100k за год).</li>
+          <li>Engagement rate: >5% (лайки + комментарии + шеры + сохранения).</li>
+          <li>Еженедельно: 2–3 коллаборации с микро-инфлюенсерами (бартер/пробники).</li>
+          <li>Stories ежедневно: 8–12 штук (опросы, Q&A, behind-the-scenes, "мой день в изумрудном").</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>3. Продажи и конверсия</h2>
+        <ul class="red-bullets">
+          <li>100% постов/Reels с тегами продуктов → Instagram Shop.</li>
+          <li>Ежемесячно: 2–3 shoppable-карусели + 1 live-продажа (демонстрация купальников + скидки).</li>
+          <li>Цель: 25–35% трафика на WB через IG (отслеживать UTM).</li>
+          <li>Акции: "Купи купальник — получи парео", "Тегни подругу — розыгрыш фисташкового".</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>4. Комьюнити и лояльность</h2>
+        <ul class="red-bullets">
+          <li>Ответ на 90% комментариев/DM в первые 24 ч.</li>
+          <li>Рубрика "Ваши луки в NUEVA" — еженедельный репост клиентского контента.</li>
+          <li>Запуск челленджа: #NUEVABeachSummer — лучшие фото/видео получают подарки.</li>
+        </ul>
+      </div>
+       <div class="card" style="grid-column: 1 / -1; justify-self: center; max-width: 500px; margin: 1rem auto 1rem auto; padding: 2rem 1.8rem;">
+        <h2>5. Аналитика и оптимизация</h2>
+        <ul class="red-bullets">
+          <li>Ежемесячно: анализ топ-контента (что даёт больше сохранений/шеров).</li>
+          <li>Тестировать: хэштеги (5–8 на пост, микс брендовые + нишевые), время публикаций.</li>
+          <li>Бюджет на продвижение: 20–30% на Reels ads (таргет: женщины 18–45, интересы "пляжная одежда", "летний отдых").</li>
+        </ul>
+      </div>
+    </div>
+    <p class="small light italic" style="margin-top:3.5rem; text-align:center; font-size:1.1rem;">
+      Итоговая цель на 2026: Instagram становится основным каналом продаж и комьюнити для <strong>NUEVA</strong> — 30–40% заказов с IG, лояльная аудитория, которая ждёт каждый пост.
+    </p>
+  </div>
+</div>
+
+<!-- Финальный слайд -->
+<div class="slide title-slide">
+  <div class="container">
+    <p class="promise">
+      Готовы к <strong>NUEVA</strong>?
+    </p>
+    <p style="font-size:2rem; margin:2rem 0; opacity:0.95;">
+      Контакты: <br>
+      Email: dev4onka5@yandex.ru <br>
+      Телефон: +7-916-622-03-06
+    </p>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
